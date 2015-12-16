@@ -55,6 +55,10 @@ body {
     margin-bottom: 100px;
 }
 
+.pageMouseEnter {
+    background-color: rgba(46, 211, 214, 1) !important;
+}
+
 @keyframes oddPage{
 
 0%        {left: -50%;top: 0%;}
@@ -65,3 +69,4 @@ body {
 0%        {left: 50%;top: 0%;}
 100%    {left:0%;top:0%;}
 }
+

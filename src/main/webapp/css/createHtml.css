@@ -1,0 +1,31 @@
+@CHARSET "UTF-8";
+body {
+    border: 0;
+    margin: 0;
+}
+
+.baseFrame {
+    width: 50%;
+    float: left;
+}
+
+#lefter {
+}
+
+#righter {
+
+}
+
+#htmlPane {
+    width: 98%;
+    border: 1px solid grey;
+    margin-top: 1%;
+    margin-left: 0.5%;
+    font-size: 15px;
+}
+
+#preview {
+    width: 98%;
+    margin-top: 1%;
+    margin-left: 0.5%;
+}

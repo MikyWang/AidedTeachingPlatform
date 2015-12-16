@@ -2,13 +2,17 @@ $(document).ready(function() {
     $('.page').bind("click", function() {
         var id=$(this).attr('id').toString();
         if (id=="htmlPage") {
-            location.href = "../login";
+            location.href = "../createHtml";
         };
         if (id=="jspPage") {
             location.href = "../index";
         };
     });
-
+    
+    $('.page').bind("mouseenter mouseleave",function(){
+        $(this).toggleClass("pageMouseEnter");
+    });
+    
     reSetSize();
 });
 
