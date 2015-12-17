@@ -1,7 +1,5 @@
 @CHARSET "UTF-8";
 body {
-    border: 0;
-    margin: 0;
     background-color: rgba(73, 193, 147, 1)
 }
 
@@ -19,17 +17,7 @@ body {
     position: relative;
 }
 
-.pageBase {
-    width: 150px;
-    height: 40px;
-    margin: 10px auto;
-    padding: 5px;
-    background-color: royalblue;
-    color: white;
-    cursor: pointer;
-    line-height: 40px;
-    position: relative;
-}
+
 
 .page:nth-child(odd) {
     animation: oddPage 1s;
@@ -53,10 +41,6 @@ body {
     height: 200px;
     margin-left: -150px;
     margin-bottom: 100px;
-}
-
-.pageMouseEnter {
-    background-color: rgba(46, 211, 214, 1) !important;
 }
 
 @keyframes oddPage{

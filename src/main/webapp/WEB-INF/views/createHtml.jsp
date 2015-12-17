@@ -10,18 +10,20 @@
 <head>
 <script src="js/jquery-1.11.3.js"></script>
 <link rel="stylesheet" type="text/css" href="css/createHtml.css" />
-<script src="js/createHtml.js"></script>
+<link rel="stylesheet" type="text/css" href="css/button.css" />
+<script src="js/button.js"></script>
+<script charset="gb2312"  type="text/javascript"  src="js/createHtml.js"></script>
 <title>创建HTML页面</title>
 </head>
 <body>
 	<div id="lefter" class="baseFrame">
-		<form action="upload">
-			<textarea id="htmlPane">${htmldata}</textarea>
-			<input type="submit" value="上传">
-		</form>
+			<div contenteditable="true" id="fileName" ></div>
+			<div contenteditable="true" id="htmlPane" ></div>
+			<div id="submitButton" class="buttonBase" >上传代码</div>
 	</div>
 	<div id="righter" class="baseFrame">
 		<div id="preview"></div>
 	</div>
+	
 </body>
 </html>

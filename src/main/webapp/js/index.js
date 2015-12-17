@@ -5,14 +5,10 @@ $(document).ready(function() {
             location.href = "../createHtml";
         };
         if (id=="jspPage") {
-            location.href = "../index";
+            location.href = "../login";
         };
     });
-    
-    $('.page').bind("mouseenter mouseleave",function(){
-        $(this).toggleClass("pageMouseEnter");
-    });
-    
+
     reSetSize();
 });
 
