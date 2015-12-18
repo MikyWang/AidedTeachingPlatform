@@ -12,11 +12,12 @@
 
 }
 
+#fileName {
+    width: 20%;
+}
+
 #htmlPane {
     width: 98%;
-    border: 1px solid grey;
-    margin-top: 1%;
-    margin-left: 0.5%;
     font-size: 15px;
 }
 
@@ -24,4 +25,8 @@
     width: 98%;
     margin-top: 1%;
     margin-left: 0.5%;
+}
+
+#submitButton{
+    margin: 10px auto 0px auto;
 }
