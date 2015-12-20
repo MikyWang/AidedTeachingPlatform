@@ -19,6 +19,7 @@
 #htmlPane {
     width: 98%;
     font-size: 15px;
+    overflow: hidden;
 }
 
 #preview {
@@ -27,6 +28,6 @@
     margin-left: 0.5%;
 }
 
-#submitButton{
-    margin: 10px auto 0px auto;
+#submitButton {
+    margin: 15px auto;
 }

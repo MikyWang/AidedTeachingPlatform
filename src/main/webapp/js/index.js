@@ -1,18 +1,19 @@
-$(document).ready(function() {
-    $('.page').bind("click", function() {
-        var id=$(this).attr('id').toString();
-        if (id=="htmlPage") {
-            location.href = "../createHtml";
-        };
-        if (id=="jspPage") {
-            location.href = "../login";
-        };
-    });
+$(window).resize(reSetSize);
 
+$(document).ready(function() {
+    $('.page').bind("click", createPage);
     reSetSize();
 });
 
-$(window).resize(reSetSize);
+function createPage() {
+    var id = $(this).attr('id').toString();
+    if (id == "htmlPage") {
+        location.href = "../createHtml";
+    };
+    if (id == "jspPage") {
+        location.href = "../createJsp";
+    };
+}
 
 function reSetSize() {
     var winHeight = $(window).height();

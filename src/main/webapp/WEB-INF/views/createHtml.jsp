@@ -11,19 +11,22 @@
 <script src="js/jquery-1.11.3.js"></script>
 <link rel="stylesheet" type="text/css" href="css/createHtml.css" />
 <link rel="stylesheet" type="text/css" href="css/baseStyle.css" />
-<script src="js/button.js"></script>
-<script charset="gb2312"  type="text/javascript"  src="js/createHtml.js"></script>
+<script type="text/javascript" src="js/setUp.js"></script>
+<script type="text/javascript" src="js/createHtml.js"></script>
 <title>创建HTML页面</title>
 </head>
 <body>
+	<div class="blockPane"></div>
+	
 	<div id="lefter" class="baseFrame ">
-			<input type="text"  placeholder="请输入文件名:"  id="fileName" class="textBase" />
-			<div contenteditable="true" id="htmlPane" class="textBase" ></div>
-			<div id="submitButton" class="buttonBase" >上传代码</div>
+		<input type="text" placeholder="请输入文件名:" id="fileName"
+			class="textBase" />
+		<textarea id="htmlPane" class="textBase" spellcheck="false"></textarea>
+		<div id="submitButton" class="buttonBase">上传代码</div>
 	</div>
 	<div id="righter" class="baseFrame">
 		<div id="preview"></div>
 	</div>
-	
+
 </body>
 </html>
