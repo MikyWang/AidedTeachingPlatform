@@ -1,11 +1,11 @@
 body {
     border: 0;
     margin: 0;
-    background-color: rgba(134, 173, 218, 1);
+    background-color: rgba(191, 191, 191, 1);
 }
 
 .buttonBase {
-    width: 150px;
+    width: 15%;
     height: 30px;
     margin: 10px auto;
     background-color: royalblue;
@@ -15,6 +15,7 @@ body {
     position: relative;
     border: 0px;
     text-align: center;
+    min-width: 150px;
 }
 
 .buttonBase:hover {
@@ -30,6 +31,7 @@ body {
     margin-top: 1%;
     margin-left: 0.5%;
     border: 0;
+    min-width:100px;
 }
 
 .blockPane {

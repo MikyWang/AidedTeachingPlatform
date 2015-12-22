@@ -2,32 +2,47 @@
 
 .baseFrame {
     width: 50%;
-    float: left;
 }
 
 #lefter {
+    float: left;
 }
 
 #righter {
-
+    float: right;
 }
 
 #fileName {
     width: 20%;
+    margin: 2% 0% 0% 0.5%;
+    max-width: 150px;
 }
 
 #htmlPane {
     width: 98%;
     font-size: 15px;
     overflow: hidden;
+    height: 85% !important;
 }
 
 #preview {
-    width: 98%;
-    margin-top: 1%;
-    margin-left: 0.5%;
+    width: 95%;
+    margin-top: 6.6%;
+    margin-bottom: 8.4%;
+    margin-right: 0.5%;
+    height: 85% !important;
+    float: right;
+    background-color: white;
+    border: 0;
 }
 
 #submitButton {
-    margin: 15px auto;
+    float: right;
+    margin: 1% 1.2% 0% 0%;
 }
+
+#showPreview {
+    float: right;
+    margin: 1% 1.2% 0% 0%;
+}
+

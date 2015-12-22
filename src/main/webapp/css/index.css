@@ -14,7 +14,9 @@
     position: relative;
 }
 
-
+.page{
+min-width: 180px;
+}
 
 .page:nth-child(odd) {
     animation: oddPage 1s;
@@ -39,6 +41,7 @@
     margin-left: -150px;
     margin-bottom: 100px;
 }
+
 
 @keyframes oddPage{
 

@@ -18,7 +18,7 @@ function createPage() {
 function reSetSize() {
     var winHeight = $(window).height();
     var headerHeight = (winHeight * 0.4);
-    var bodyHeight = (winHeight * 0.6);
+    var bodyHeight = (winHeight * 0.5);
     $('#header').css("height", headerHeight.toString());
     $('#body').css("height", bodyHeight.toString());
 }
