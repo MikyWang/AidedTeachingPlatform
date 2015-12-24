@@ -8,8 +8,8 @@ $(window).resize(reSetSize);
 
 $(document).ready(function() {
     $('#righter').hide();
-    reSetSize();
     InitHtml();
+    reSetSize();
 });
 
 function uploadFile() {
@@ -50,12 +50,16 @@ function showPreview() {
             data : JSON.stringify(uploadFile),
             success : function() {
                 $('#preview').attr("src", path);
+                $('#showPreview').html("隐藏预览");
                 reSetSize();
             },
             error : function() {
                 alert("error");
             }
         });
+    } else {
+        reSetSize();
+        $('#showPreview').html("预览");
     };
 }
 
@@ -85,11 +89,15 @@ function InitHtml() {
 
 function reSetSize() {
     if (isShowClick) {
-        $('#righter').show(1000);
-        $('#lefter').css("width", "50%");
+        $('#righter').show();
+        $('#lefter').animate({
+            "width" : "50%"
+        }, "slow");
     } else {
-        $('#righter').hide(1000);
-        $('#lefter').css("width", "100%");
+        $('#righter').hide();
+        $('#lefter').animate({
+            "width" : "100%"
+        }, "slow");
     };
     var winHeight = $(window).height();
     var htmlPaneHeight = winHeight;
