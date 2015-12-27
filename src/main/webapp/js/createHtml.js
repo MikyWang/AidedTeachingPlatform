@@ -3,6 +3,10 @@
  */
 var path = null;
 var isShowClick = false;
+var uploadString = "是否查看代码生成的网页?";
+var emptyFileNameString = "<input type=\"text\" id=\"verifyFileName\"  placeholder=\"请输入文件名:\"  class=\"textBase\" />";
+var time = 200;
+var time_out;
 
 $(window).resize(reSetSize);
 
@@ -14,31 +18,69 @@ $(document).ready(function() {
 
 function uploadFile() {
     $('.blockPane').show();
-    var uploadFile = {
-        fileName : $('#fileName').val(),
-        fileBody : $('#htmlPane').val()
+    if ($('#fileName').val() == "") {
+        time_out = setInterval(verifyFileName, time);
+        $('#popUpTitle').html(emptyFileNameString);
+        $('.cd-popup').addClass('is-visible');
+        $('.alert').unbind('click', jumpToNewPage);
+        $('.alert').bind('click', saveFileName);
+    } else {
+        var uploadFile = {
+            fileName : $('#fileName').val(),
+            fileBody : $('#htmlPane').val()
+        };
+        path = "htmls/" + uploadFile.fileName.toString();
+        $.ajax({
+            type : "POST",
+            url : "uploadHtml",
+            async : true,
+            contentType : "application/json; charset=utf-8",
+            data : JSON.stringify(uploadFile),
+            success : function() {
+                $('.alert').unbind('click', saveFileName);
+                $('.alert').bind('click', jumpToNewPage);
+                $('#popUpTitle').html(uploadString);
+                $('.cd-popup').addClass('is-visible');
+            },
+            error : function() {
+                alert("error");
+            }
+        });
     };
-    path = "htmls/" + uploadFile.fileName.toString();
-    $.ajax({
-        type : "POST",
-        url : "uploadHtml",
-        async : true,
-        contentType : "application/json; charset=utf-8",
-        data : JSON.stringify(uploadFile),
-        success : function() {
-            $('.cd-popup').addClass('is-visible');
-        },
-        error : function() {
-            alert("error");
-        }
-    });
+}
+
+function verifyFileName() {
+    var verifyFileName = $('#verifyFileName').val();
+    if (isNullOrUndefined(verifyFileName)) {
+        $('#yesButton').attr("disabled", "disabled");
+        $('#yesButton').removeClass('enable');
+    } else {
+        $('#yesButton').removeAttr('disabled');
+        $('#yesButton').addClass('enable');
+    };
+};
+
+function saveFileName() {
+    if ($(this).attr('id') == "yesButton") {
+        $('#fileName').val($('#verifyFileName').val());
+        clearInterval(time_out);
+        uploadFile();
+    } else {
+        $('#popUpTitle').html("");
+    };
+}
+
+function jumpToNewPage() {
+    if ($(this).attr('id') == "yesButton") {
+        location.href = path;
+    };
 }
 
 function showPreview() {
     isShowClick = !isShowClick;
     if (isShowClick) {
         var uploadFile = {
-            fileName : $('#fileName').val(),
+            fileName : "temp.html",
             fileBody : $('#htmlPane').val()
         };
         path = "htmls/" + uploadFile.fileName.toString();
@@ -58,8 +100,8 @@ function showPreview() {
             }
         });
     } else {
-        reSetSize();
         $('#showPreview').html("预览");
+        reSetSize();
     };
 }
 
@@ -71,7 +113,6 @@ function InitHtml() {
         success : function(data) {
             $('body').html(data + $('body').html());
             $('#showPreview').bind('click', showPreview);
-            $('#popUpTitle').html("是否查看代码生成的网页?");
             $('#submitButton').bind('click', uploadFile);
             initSetUp();
         }
@@ -88,20 +129,28 @@ function InitHtml() {
 }
 
 function reSetSize() {
-    if (isShowClick) {
-        $('#righter').show();
-        $('#lefter').animate({
-            "width" : "50%"
-        }, "slow");
-    } else {
+    $('#lefter').clearQueue();
+    if ($(window).width() <= 1000) {
+        $('#showPreview').hide();
         $('#righter').hide();
         $('#lefter').animate({
             "width" : "100%"
-        }, "slow");
+        });
+    } else {
+        $('#showPreview').show();
+        if (isShowClick) {
+            $('#righter').show();
+            $('#lefter').animate({
+                "width" : "50%"
+            });
+        } else {
+            $('#righter').hide();
+            $('#lefter').animate({
+                "width" : "100%"
+            });
+        };
     };
     var winHeight = $(window).height();
-    var htmlPaneHeight = winHeight;
+    var htmlPaneHeight = winHeight * 0.83;
     $('.baseFrame').css("height", winHeight.toString());
-    $('#htmlPane').css("height", htmlPaneHeight.toString());
-    $('#preview').css("height", htmlPaneHeight.toString());
 }

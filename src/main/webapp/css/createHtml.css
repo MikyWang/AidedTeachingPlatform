@@ -2,6 +2,7 @@
 
 .baseFrame {
     width: 50%;
+    overflow: auto !important;
 }
 
 #lefter {
@@ -15,23 +16,20 @@
 
 #fileName {
     width: 20%;
-    margin: 2% 0% 0% 0.5%;
+    margin: 1% 0.5% 1% 0.5%;
     max-width: 150px;
 }
 
 #htmlPane {
     width: 98%;
     font-size: 15px;
-    overflow: hidden;
     height: 85% !important;
 }
 
 #preview {
     width: 95%;
-    margin-top: 6.6%;
-    margin-bottom: 8.4%;
-    margin-right: 0.5%;
-    height: 85% !important;
+    margin: 0.5% 0.5% 0.5% 0.5%;
+    height: 99% !important;
     float: right;
     background-color: white;
     border: 0;
@@ -39,11 +37,11 @@
 
 #submitButton {
     float: right;
-    margin: 1% 1.2% 0% 0%;
+    margin: 0.5% 1.6% 0.5% 0%;
 }
 
 #showPreview {
     float: right;
-    margin: 1% 1.2% 0% 0%;
+    margin: 0.5% 1.6% 0.5% 0%;
 }
 

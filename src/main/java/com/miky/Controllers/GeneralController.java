@@ -27,16 +27,6 @@ public class GeneralController extends BaseController {
 
 	@RequestMapping(value = "createHtml")
 	public String createHtml_jsp(Model model) {
-		// try {
-		//
-		// String htmlPage=FileHelper.GetFile(request, "Init.html",
-		// FileType.html);
-		// model.addAttribute("initdata", htmlPage);
-		//
-		// } catch (Exception e) {
-		// e.printStackTrace();
-		// }
-		//
 		return "createHtml";
 	}
 
@@ -47,7 +37,7 @@ public class GeneralController extends BaseController {
 
 			FileHelper.PutFile(request, uploadFile.getFileBody(), uploadFile.getFileName(), FileType.html);
 			response.setContentType("text/html;charset=UTF-8");
-			response.sendRedirect("htmls/" + uploadFile.getFileName());
+//			response.sendRedirect("htmls/" + uploadFile.getFileName());
 
 		} catch (Exception e) {
 

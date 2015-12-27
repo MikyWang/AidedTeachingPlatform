@@ -14,12 +14,14 @@ function setBlockSize() {
 }
 
 function popUp() {
-    if ($(this).attr('id') == "yesButton") {
-        location.href = path;
-    } else {
+    if ($(this).attr('id') == "noButton") {
         $('.cd-popup').removeClass('is-visible');
         $('.blockPane').hide();
     };
+}
+
+function isNullOrUndefined(object) {
+    return object == null || object == "" || object == undefined;
 }
 
 function initSetUp() {

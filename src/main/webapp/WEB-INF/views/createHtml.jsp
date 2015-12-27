@@ -17,16 +17,16 @@
 </head>
 <body>
 	<div class="blockPane"></div>
-	
+
 	<div id="lefter" class="baseFrame ">
 		<input type="text" placeholder="请输入文件名:" id="fileName"
 			class="textBase" />
-			<div id="showPreview" class="buttonBase">预览</div>
+		<div id="showPreview" class="buttonBase enable">预览</div>
 		<textarea id="htmlPane" class="textBase" spellcheck="false"></textarea>
-		<div id="submitButton" class="buttonBase">上传代码</div>
+		<div id="submitButton" class="buttonBase enable">上传代码</div>
 	</div>
 	<div id="righter" class="baseFrame">
-		<iframe id="preview" ></iframe>
+		<iframe id="preview"></iframe>
 	</div>
 
 </body>
