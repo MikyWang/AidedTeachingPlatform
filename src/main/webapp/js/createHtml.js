@@ -4,7 +4,7 @@
 var path = null;
 var isShowClick = false;
 var uploadString = "是否查看代码生成的网页?";
-var emptyFileNameString = "<input type=\"text\" id=\"verifyFileName\"  placeholder=\"请输入文件名:\"  class=\"textBase\" />";
+var emptyFileNameString = "<input type=\"text\" id=\"verifyFileName\"  placeholder=\"请输入文件名:\"  class=\"textBase input\" />";
 var time = 200;
 var time_out;
 
@@ -16,14 +16,19 @@ $(document).ready(function() {
     reSetSize();
 });
 
+function addSuffix() {
+    if ($(this).val().indexOf('.') > 0) {
+        $(this).val($(this).val() + "html");
+    };
+}
+
 function uploadFile() {
     $('.blockPane').show();
     if ($('#fileName').val() == "") {
         time_out = setInterval(verifyFileName, time);
         $('#popUpTitle').html(emptyFileNameString);
         $('.cd-popup').addClass('is-visible');
-        $('.alert').unbind('click', jumpToNewPage);
-        $('.alert').bind('click', saveFileName);
+        $('.alert').unbind('click', jumpToNewPage).bind('click', saveFileName);
     } else {
         var uploadFile = {
             fileName : $('#fileName').val(),
@@ -37,8 +42,7 @@ function uploadFile() {
             contentType : "application/json; charset=utf-8",
             data : JSON.stringify(uploadFile),
             success : function() {
-                $('.alert').unbind('click', saveFileName);
-                $('.alert').bind('click', jumpToNewPage);
+                $('.alert').unbind('click', saveFileName).bind('click', jumpToNewPage);
                 $('#popUpTitle').html(uploadString);
                 $('.cd-popup').addClass('is-visible');
             },
@@ -52,11 +56,9 @@ function uploadFile() {
 function verifyFileName() {
     var verifyFileName = $('#verifyFileName').val();
     if (isNullOrUndefined(verifyFileName)) {
-        $('#yesButton').attr("disabled", "disabled");
-        $('#yesButton').removeClass('enable');
+        $('#yesButton').attr("disabled", "disabled").removeClass('enable');
     } else {
-        $('#yesButton').removeAttr('disabled');
-        $('#yesButton').addClass('enable');
+        $('#yesButton').removeAttr('disabled').addClass('enable');
     };
 };
 
@@ -111,9 +113,10 @@ function InitHtml() {
         url : "htmls/popUp.html",
         async : true,
         success : function(data) {
-            $('body').html(data + $('body').html());
+            $('body').prepend(data);
             $('#showPreview').bind('click', showPreview);
             $('#submitButton').bind('click', uploadFile);
+            $('.input').bind('input', addSuffix);
             initSetUp();
         }
     });
@@ -134,19 +137,19 @@ function reSetSize() {
         $('#showPreview').hide();
         $('#righter').hide();
         $('#lefter').animate({
-            "width" : "100%"
+            width : "100%"
         });
     } else {
         $('#showPreview').show();
         if (isShowClick) {
             $('#righter').show();
             $('#lefter').animate({
-                "width" : "50%"
+                width : "50%"
             });
         } else {
             $('#righter').hide();
             $('#lefter').animate({
-                "width" : "100%"
+                width : "100%"
             });
         };
     };
