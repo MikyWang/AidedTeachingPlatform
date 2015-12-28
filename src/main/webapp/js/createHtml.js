@@ -4,7 +4,7 @@
 var path = null;
 var isShowClick = false;
 var uploadString = "是否查看代码生成的网页?";
-var emptyFileNameString = "<input type=\"text\" id=\"verifyFileName\"  placeholder=\"请输入文件名:\"  class=\"textBase input\" />";
+var emptyFileNameString = "<input type=\"text\" id=\"verifyFileName\"  placeholder=\"请输入文件名:\"  class=\"textBase\" />";
 var time = 200;
 var time_out;
 
@@ -27,6 +27,7 @@ function uploadFile() {
     if ($('#fileName').val() == "") {
         time_out = setInterval(verifyFileName, time);
         $('#popUpTitle').html(emptyFileNameString);
+        $('#verifyFileName').bind('input', addSuffix);
         $('.cd-popup').addClass('is-visible');
         $('.alert').unbind('click', jumpToNewPage).bind('click', saveFileName);
     } else {
