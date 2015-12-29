@@ -26,6 +26,7 @@
 		<div id="submitButton" class="buttonBase enable">上传代码</div>
 	</div>
 	<div id="righter" class="baseFrame">
+		<div id="refreshPreview" class="buttonBase enable">刷新预览</div>
 		<iframe id="preview"></iframe>
 	</div>
 

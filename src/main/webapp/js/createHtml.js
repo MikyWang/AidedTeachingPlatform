@@ -5,8 +5,6 @@ var path = null;
 var isShowClick = false;
 var uploadString = "是否查看代码生成的网页?";
 var emptyFileNameString = "请输入文件名";
-var time = 200;
-var time_out;
 var hasPoint = false;
 
 $(window).resize(reSetSize);
@@ -17,6 +15,38 @@ $(document).ready(function() {
     reSetSize();
 });
 
+function InitHtml() {
+    $.ajax({
+        type : "GET",
+        url : "htmls/popUp.html",
+        async : true,
+        success : function(data) {
+            $('body').prepend(data);
+            $('#showPreview').bind('click', showPreview);
+            $('#refreshPreview').bind('click', refreshPreview);
+            $('#submitButton').bind('click', upload);
+            $('.input').bind('input', addSuffix).bind('change', checkSuffix);
+            initSetUp();
+        }
+    });
+
+    $.ajax({
+        type : "GET",
+        url : "htmls/Init.html",
+        async : true,
+        success : function(data) {
+            $('#htmlPane').text(data);
+        }
+    });
+}
+
+function checkSuffix() {
+    if (!hasPoint) {
+        $(this).val($(this).val() + ".html");
+        hasPoint = true;
+    };
+}
+
 function addSuffix() {
     if ($(this).val().indexOf('.') > 0 && !hasPoint) {
         hasPoint = true;
@@ -25,12 +55,26 @@ function addSuffix() {
     if ($(this).val().indexOf('.') < 0) {
         hasPoint = false;
     };
+    if ($(this).attr('id') == "verifyFileName") {
+        verifyFileName();
+    };
 }
 
-function uploadFile() {
+function saveFile(uploadFile, success) {
+    path = "htmls/" + uploadFile.fileName.toString();
+    $.ajax({
+        type : "POST",
+        url : "uploadHtml",
+        async : true,
+        contentType : "application/json; charset=utf-8",
+        data : JSON.stringify(uploadFile),
+        success : success
+    });
+}
+
+function upload() {
     $('.blockPane').show();
     if ($('#fileName').val() == "") {
-        time_out = setInterval(verifyFileName, time);
         $('#popUpTitle').html(emptyFileNameString);
         $('#verifyFileName').show();
         $('.cd-popup').addClass('is-visible');
@@ -40,21 +84,10 @@ function uploadFile() {
             fileName : $('#fileName').val(),
             fileBody : $('#htmlPane').val()
         };
-        path = "htmls/" + uploadFile.fileName.toString();
-        $.ajax({
-            type : "POST",
-            url : "uploadHtml",
-            async : true,
-            contentType : "application/json; charset=utf-8",
-            data : JSON.stringify(uploadFile),
-            success : function() {
-                $('.alert').unbind('click', saveFileName).bind('click', jumpToNewPage);
-                $('#popUpTitle').html(uploadString);
-                $('.cd-popup').addClass('is-visible');
-            },
-            error : function() {
-                alert("error");
-            }
+        saveFile(uploadFile, function() {
+            $('.alert').unbind('click', saveFileName).bind('click', jumpToNewPage);
+            $('#popUpTitle').html(uploadString);
+            $('.cd-popup').addClass('is-visible');
         });
     };
 }
@@ -69,11 +102,10 @@ function verifyFileName() {
 };
 
 function saveFileName() {
-    clearInterval(time_out);
     $('#verifyFileName').hide();
     if ($(this).attr('id') == "yesButton") {
         $('#fileName').val($('#verifyFileName').val());
-        uploadFile();
+        upload();
     };
 }
 
@@ -83,56 +115,33 @@ function jumpToNewPage() {
     };
 }
 
+function refreshPreview() {
+    var uploadFile = generatePreviewFile();
+    saveFile(uploadFile, function() {
+        $('#preview').attr("src", path);
+    });
+}
+
+function generatePreviewFile() {
+    return {
+        fileName : "temp.html",
+        fileBody : $('#htmlPane').val()
+    };
+}
+
 function showPreview() {
     isShowClick = !isShowClick;
     if (isShowClick) {
-        var uploadFile = {
-            fileName : "temp.html",
-            fileBody : $('#htmlPane').val()
-        };
-        path = "htmls/" + uploadFile.fileName.toString();
-        $.ajax({
-            type : "POST",
-            url : "uploadHtml",
-            async : true,
-            contentType : "application/json; charset=utf-8",
-            data : JSON.stringify(uploadFile),
-            success : function() {
-                $('#preview').attr("src", path);
-                $('#showPreview').html("隐藏预览");
-                reSetSize();
-            },
-            error : function() {
-                alert("error");
-            }
+        var uploadFile = generatePreviewFile();
+        saveFile(uploadFile, function() {
+            $('#preview').attr("src", path);
+            $('#showPreview').html("隐藏预览");
+            reSetSize();
         });
     } else {
         $('#showPreview').html("预览");
         reSetSize();
     };
-}
-
-function InitHtml() {
-    $.ajax({
-        type : "GET",
-        url : "htmls/popUp.html",
-        async : true,
-        success : function(data) {
-            $('body').prepend(data);
-            $('#showPreview').bind('click', showPreview);
-            $('#submitButton').bind('click', uploadFile);
-            initSetUp();
-        }
-    });
-
-    $.ajax({
-        type : "GET",
-        url : "htmls/Init.html",
-        async : true,
-        success : function(data) {
-            $('#htmlPane').text(data);
-        }
-    });
 }
 
 function reSetSize() {
