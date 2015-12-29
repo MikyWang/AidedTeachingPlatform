@@ -4,9 +4,10 @@
 var path = null;
 var isShowClick = false;
 var uploadString = "是否查看代码生成的网页?";
-var emptyFileNameString = "<input type=\"text\" id=\"verifyFileName\"  placeholder=\"请输入文件名:\"  class=\"textBase\" />";
+var emptyFileNameString = "请输入文件名";
 var time = 200;
 var time_out;
+var hasPoint = false;
 
 $(window).resize(reSetSize);
 
@@ -17,8 +18,12 @@ $(document).ready(function() {
 });
 
 function addSuffix() {
-    if ($(this).val().indexOf('.') > 0) {
+    if ($(this).val().indexOf('.') > 0 && !hasPoint) {
+        hasPoint = true;
         $(this).val($(this).val() + "html");
+    };
+    if ($(this).val().indexOf('.') < 0) {
+        hasPoint = false;
     };
 }
 
@@ -27,7 +32,7 @@ function uploadFile() {
     if ($('#fileName').val() == "") {
         time_out = setInterval(verifyFileName, time);
         $('#popUpTitle').html(emptyFileNameString);
-        $('#verifyFileName').bind('input', addSuffix);
+        $('#verifyFileName').show();
         $('.cd-popup').addClass('is-visible');
         $('.alert').unbind('click', jumpToNewPage).bind('click', saveFileName);
     } else {
@@ -64,12 +69,11 @@ function verifyFileName() {
 };
 
 function saveFileName() {
+    clearInterval(time_out);
+    $('#verifyFileName').hide();
     if ($(this).attr('id') == "yesButton") {
         $('#fileName').val($('#verifyFileName').val());
-        clearInterval(time_out);
         uploadFile();
-    } else {
-        $('#popUpTitle').html("");
     };
 }
 
@@ -117,7 +121,6 @@ function InitHtml() {
             $('body').prepend(data);
             $('#showPreview').bind('click', showPreview);
             $('#submitButton').bind('click', uploadFile);
-            $('.input').bind('input', addSuffix);
             initSetUp();
         }
     });

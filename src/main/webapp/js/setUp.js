@@ -25,5 +25,7 @@ function isNullOrUndefined(object) {
 }
 
 function initSetUp() {
+    $('#verifyFileName').hide();
     $('.alert').bind('click', popUp);
+    $('.input').bind('input', addSuffix);
 }

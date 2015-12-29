@@ -14,8 +14,9 @@
     position: relative;
 }
 
-.page{
-min-width: 180px;
+.page {
+    min-width: 180px;
+    width: 15%;
 }
 
 .page:nth-child(odd) {
@@ -41,7 +42,6 @@ min-width: 180px;
     margin-left: -150px;
     margin-bottom: 100px;
 }
-
 
 @keyframes oddPage{
 

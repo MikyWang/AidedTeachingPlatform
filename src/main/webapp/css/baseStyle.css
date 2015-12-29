@@ -5,7 +5,7 @@ body {
 }
 
 .buttonBase {
-    width: 15%;
+    width: 150px;
     height: 30px;
     margin: 10px auto;
     background-color: royalblue;
@@ -15,7 +15,6 @@ body {
     position: relative;
     border: 0px;
     text-align: center;
-    min-width: 150px;
 }
 
 .enable:hover {
