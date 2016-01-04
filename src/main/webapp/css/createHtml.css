@@ -16,20 +16,21 @@
 
 #fileName {
     width: 20%;
-    margin: 1% 0.5% 1% 0.5%;
     max-width: 150px;
+    position: relative;
+    margin-bottom: 5px;
+    margin-top: 10px;
 }
 
-#htmlPane {
+#Pane {
     width: 98%;
     font-size: 15px;
-    height: 85% !important;
+    height: 83% !important;
 }
 
 #preview {
-    width: 95%;
-    margin: 0.5% 0.5% 0.5% 0.5%;
-    height: 90% !important;
+    width: 98%;
+    height: 91% !important;
     float: right;
     background-color: white;
     border: 0;
@@ -37,15 +38,19 @@
 
 #submitButton {
     float: right;
-    margin: 0.5% 1.6% 0.5% 0%;
+    right: 2%;
+    margin-top: 15px;
 }
-
 #showPreview {
     float: right;
-    margin: 0.5% 1.6% 0.5% 0%;
+    right: 2%;
+    margin-top: 5px;
+    margin-bottom: 15px;
 }
 
 #refreshPreview {
     float: left;
-    margin: 0.5% 0.5% 0.5% 4.5%;
+    left: 2%;
+    margin-top: 5px;
+    margin-bottom: 15px;
 }

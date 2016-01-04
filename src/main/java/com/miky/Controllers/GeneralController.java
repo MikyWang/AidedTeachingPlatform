@@ -37,7 +37,6 @@ public class GeneralController extends BaseController {
 
 			FileHelper.PutFile(request, uploadFile.getFileBody(), uploadFile.getFileName(), FileType.html);
 			response.setContentType("text/html;charset=UTF-8");
-//			response.sendRedirect("htmls/" + uploadFile.getFileName());
 
 		} catch (Exception e) {
 

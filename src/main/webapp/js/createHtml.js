@@ -35,7 +35,7 @@ function InitHtml() {
         url : "htmls/Init.html",
         async : true,
         success : function(data) {
-            $('#htmlPane').text(data);
+            $('#Pane').text(data);
         }
     });
 }
@@ -82,7 +82,7 @@ function upload() {
     } else {
         var uploadFile = {
             fileName : $('#fileName').val(),
-            fileBody : $('#htmlPane').val()
+            fileBody : $('#Pane').val()
         };
         saveFile(uploadFile, function() {
             $('.alert').unbind('click', saveFileName).bind('click', jumpToNewPage);
@@ -125,7 +125,7 @@ function refreshPreview() {
 function generatePreviewFile() {
     return {
         fileName : "temp.html",
-        fileBody : $('#htmlPane').val()
+        fileBody : $('#Pane').val()
     };
 }
 
@@ -155,9 +155,10 @@ function reSetSize() {
     } else {
         $('#showPreview').show();
         if (isShowClick) {
-            $('#righter').show();
             $('#lefter').animate({
                 width : "50%"
+            }, function() {
+                $('#righter').show();
             });
         } else {
             $('#righter').hide();
