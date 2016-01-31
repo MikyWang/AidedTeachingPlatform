@@ -41,7 +41,7 @@ public class GeneralController extends BaseController {
 		} catch (Exception e) {
 
 		}
-		return ("html/" + uploadFile.getFileName());
+		return ("htmls/" + uploadFile.getFileName());
 	}
 
 	@RequestMapping(value = "login", method = RequestMethod.POST)
@@ -52,11 +52,11 @@ public class GeneralController extends BaseController {
 		return "login";
 	}
 
-	@RequestMapping(value = "login", method = RequestMethod.GET)
+	@RequestMapping(value="/")
 	public String loging_jsp(User user, Model model) {
 
-		model.addAttribute("user", "hee");
+	
 
-		return "login";
+		return "html/index.html";
 	}
 }

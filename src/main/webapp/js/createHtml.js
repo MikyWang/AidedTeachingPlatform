@@ -2,17 +2,26 @@
  * @author v-qimiky
  */
 var path = null;
-var isShowClick = false;
 var uploadString = "是否查看代码生成的网页?";
 var emptyFileNameString = "请输入文件名";
 var hasPoint = false;
 
+var CreateHtmlViewModel = {
+    showPreview : showPreview,
+    refreshPreview : refreshPreview,
+    upload:upload,
+    isShowClick : ko.observable(false),
+    preview : ko.computed(function() {
+       return "预览";
+    }),
+};
+
 $(window).resize(reSetSize);
 
 $(document).ready(function() {
-    $('#righter').hide();
     InitHtml();
     reSetSize();
+    ko.applyBindings(CreateHtmlViewModel);
 });
 
 function InitHtml() {
@@ -22,8 +31,6 @@ function InitHtml() {
         async : true,
         success : function(data) {
             $('body').prepend(data);
-            $('#showPreview').bind('click', showPreview);
-            $('#refreshPreview').bind('click', refreshPreview);
             $('#submitButton').bind('click', upload);
             $('.input').bind('input', addSuffix).bind('change', checkSuffix);
             initSetUp();
@@ -77,6 +84,7 @@ function upload() {
     if ($('#fileName').val() == "") {
         $('#popUpTitle').html(emptyFileNameString);
         $('#verifyFileName').show();
+        verifyFileName();
         $('.cd-popup').addClass('is-visible');
         $('.alert').unbind('click', jumpToNewPage).bind('click', saveFileName);
     } else {
@@ -130,16 +138,14 @@ function generatePreviewFile() {
 }
 
 function showPreview() {
-    isShowClick = !isShowClick;
-    if (isShowClick) {
+    CreateHtmlViewModel.isShowClick(!CreateHtmlViewModel.isShowClick());
+    if (CreateHtmlViewModel.isShowClick()) {
         var uploadFile = generatePreviewFile();
         saveFile(uploadFile, function() {
             $('#preview').attr("src", path);
-            $('#showPreview').html("隐藏预览");
             reSetSize();
         });
     } else {
-        $('#showPreview').html("预览");
         reSetSize();
     };
 }
@@ -147,21 +153,18 @@ function showPreview() {
 function reSetSize() {
     $('#lefter').clearQueue();
     if ($(window).width() <= 1000) {
+        CreateHtmlViewModel.isShowClick(false);
         $('#showPreview').hide();
-        $('#righter').hide();
         $('#lefter').animate({
             width : "100%"
         });
     } else {
         $('#showPreview').show();
-        if (isShowClick) {
+        if (CreateHtmlViewModel.isShowClick()) {
             $('#lefter').animate({
                 width : "50%"
-            }, function() {
-                $('#righter').show();
             });
         } else {
-            $('#righter').hide();
             $('#lefter').animate({
                 width : "100%"
             });

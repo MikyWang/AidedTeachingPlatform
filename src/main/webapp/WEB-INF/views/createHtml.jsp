@@ -8,7 +8,8 @@
 <!DOCTYPE html>
 <html>
 <head>
-<script src="js/jquery-1.11.3.js"></script>
+<script type="text/javascript" src="js/jquery-1.11.3.js"></script>
+<script type="text/javascript"  src="js/knockout-3.4.0.debug.js"></script>
 <link rel="stylesheet" type="text/css" href="css/createHtml.css" />
 <link rel="stylesheet" type="text/css" href="css/baseStyle.css" />
 <script type="text/javascript" src="js/setUp.js"></script>
@@ -17,16 +18,15 @@
 </head>
 <body>
 	<div class="blockPane"></div>
-	<span hidden="hidden"></span>
 	<div id="lefter" class="baseFrame ">
 		<input type="text" placeholder="请输入文件名:" id="fileName"
 			class="textBase input" />
-		<div id="showPreview" class="buttonBase enable">预览</div>
+		<div id="showPreview" class="buttonBase enable" data-bind="click : showPreview,html : preview"></div>
 		<textarea id="Pane" class="textBase" spellcheck="false"></textarea>
-		<div id="submitButton" class="buttonBase enable">上传代码</div>
+		<div id="submitButton" class="buttonBase enable" data-bind="click : upload">上传代码</div>
 	</div>
-	<div id="righter" class="baseFrame">
-		<div id="refreshPreview" class="buttonBase enable">刷新预览</div>
+	<div id="righter" class="baseFrame" data-bind="visible : isShowClick">
+		<div id="refreshPreview" class="buttonBase enable" data-bind="click : refreshPreview">刷新预览</div>
 		<iframe id="preview"></iframe>
 	</div>
 
